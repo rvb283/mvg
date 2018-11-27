@@ -1,0 +1,27 @@
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+html, body {
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#canvas {
+  display:block;
+  width: 100%;
+  height: 100%;
+}
+div,span{
+  z-index: 1;
+  position: absolute;
+}
+#score{
+  right:0;
+  top: 0;
+  font-size: 24px;
+}
