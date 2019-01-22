@@ -80,43 +80,14 @@ question: "Question #1", answer:"answer",enemies:[{x:canvas.width,y:0},{x:canvas
     let targetPlayerY = player.y + (player.size/2);
     let xFromPlayer = targetPlayerX-instance.x;
     let yFromPlayer = targetPlayerY-instance.y;
-    let yxRatio = yFromPlayer/xFromPlayer;
-    let xyRatio = xFromPlayer/yFromPlayer;
     let distanceFromPlayer = Math.sqrt(Math.pow(xFromPlayer,2)*Math.pow(yFromPlayer,2));
-    let speed = 5;
-    let possibleXValues = [(-yxRatio+Math.sqrt(Math.pow(yxRatio,2)+(4*speed)))/2,(-yxRatio-Math.sqrt(Math.pow(yxRatio,2)+(4*speed)))/2];
-    if(xFromPlayer === 0 || isNaN(yxRatio) || isNaN(possibleXValues[0]) || isNaN(possibleXValues[1])){
-      possibleXValues = [0,0];
-      yxRatio = 0;
+    let speed = 3;
+    let moveAngle = Math.atan2(yFromPlayer, xFromPlayer);
+
+    if(distanceFromPlayer >= speed){
+      instance.x += Math.cos(moveAngle) * speed;
+      instance.y += Math.sin(moveAngle) * speed;
     }
-    let possibleYValues = [possibleXValues[0]*yxRatio,possibleXValues[1]*yxRatio];
-    // let possibleYValues = [(-xyRatio+Math.sqrt(Math.pow(xyRatio,2)+(4*speed)))/2,(-xyRatio-Math.sqrt(Math.pow(xyRatio,2)+(4*speed)))/2];
-    console.log("x position: "+instance.x+" xChange: "+ possibleXValues);
-    console.log("y position: "+instance.y+" yChange: "+ possibleYValues);
-
-    let oldx = instance.x;
-    let oldy = instance.y;
-
-    if(distanceFromPlayer >= 5){
-      if(xFromPlayer >= 0){
-          instance.x += possibleXValues[0];
-          instance.y += possibleYValues[0];
-      } else {
-          instance.x += possibleXValues[1];
-          instance.y += possibleYValues[1];
-      }
-    } else{
-      instance.x = player.x;
-      instance.y = player.y;
-    }
-
-
-
-    // instance.y += possibleYValues[0];
-
-    console.log("Distance: "+Math.sqrt(Math.pow(instance.x-oldx,2)+Math.pow(instance.y-oldy,2)));
-    console.log("enemy array: "+JSON.stringify(thislevel.enemies[0])+","+JSON.stringify(thislevel.enemies[1]));
-
   }
 
   $(window).on("resize",function(){
