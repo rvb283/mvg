@@ -13,7 +13,7 @@ $(function(){
 v:[{y1:0,y2:canvas.height,x:0, render:true},{y1:0,y2:canvas.height,x:canvas.width, render:true},{y1:600+1,y2:800-1,x:800, render:true},{y1:200, y2:600, x:1800, render:true}]},
 {h:[{x1:0,x2:canvas.width,y:0, render:true},{x1:0,x2:canvas.width,y:canvas.height, render:true},{x1:0,x2:400,y:800, render:true},{x1:600,x2:1000,y:800, render:true},{x1:1400,x2:1800,y:800, render:true},{x1:400,x2:800,y:600, render:true},{x1:1200,x2:1400,y:600, render:true},{x1:1800,x2:2000,y:600, render:true},{x1:0,x2:200,y:400,render:true},{x1:800,x2:1000,y:400,render:true},{x1:1200,x2:1800,y:400,render:true},{x1:200,x2:600,y:200,render:true},{x1:1000,x2:1200,y:200,render:true},{x1:1600,x2:2000,y:201,render:true}],
 v:[{y1:0,y2:canvas.height,x:0, render:true},{y1:0,y2:canvas.height,x:canvas.width, render:true},{y1:800,y2:1000,x:800, render:true},{y1:800,y2:1000,x:1200, render:true},{y1:600+1,y2:800,x:600, render:true},{y1:600+1,y2:800,x:1000, render:true},{y1:600+1,y2:800-1,x:1400, render:true},{y1:400+1,y2:600-1,x:200, render:true},{y1:200+1,y2:600-1,x:400, render:true},{y1:400+1,y2:600-1,x:800, render:true},{y1:400+1,y2:600-1,x:1200, render:true},{y1:400+1,y2:600,x:1600, render:true},{y1:200+1,y2:400,x:600, render:true},{y1:200+1,y2:400-1,x:1000, render:true},{y1:0,y2:400-1,x:1400, render:true},{y1:0,y2:200,x:800, render:true}],
-question: "Question #1", answer:"answer",answered: false, enemies:[{x:canvas.width,y:0,skin:0},{x:canvas.width,y:canvas.height,skin:0}]},
+question: "What’s the fastest can cats run? A; 5 mph, B; 30 mph, C, 45 mph.", answer:"B",answered: false, enemies:[{x:canvas.width,y:0,skin:0},{x:canvas.width,y:canvas.height,skin:0}]},
 /*Rows*/{h:[{x1:0,x2:30,y:15, render:true},{x1:0,x2:30,y:0, render:true},
 /*Row 1*/{x1:3,x2:6,y:1},{x1:12,x2:17,y:1},{x1:19,x2:21,y:1},{x1:22,x2:24,y:1},{x1:26,x2:27,y:1},{x1:29,x2:30,y:1},
 /*Row 2*/{x1:0,x2:2,y:2},{x1:4,x2:8,y:2},{x1:10,x2:16,y:2},{x1:17,x2:19,y:2},{x1:21,x2:22,y:2},{x1:23,x2:25,y:2},{x1:27,x2:29,y:2},
@@ -59,14 +59,16 @@ question: "Question #1", answer:"answer",answered: false, enemies:[{x:canvas.wid
 /*Column 27*/{y2:6,y1:7,x:27},{y2:8,y1:10,x:27},{y2:13,y1:15,x:27},
 /*Column 28*/{y2:1,y1:4,x:28},{y2:5,y1:7,x:28},{y2:8,y1:9,x:28},{y2:11,y1:12,x:28},
 /*Column 29*/{y2:4,y1:6,x:29},{y2:7,y1:10,x:29},{y2:12,y1:14,x:29}],
-simpleposition:true,goalposition:[5800,-2000]}];
-  let endlevel = {h:[{x1:0,x2:canvas.width,y:0, render:true},{x1:0,x2:canvas.width,y:canvas.height, render:true}],v:[{y1:0,y2:canvas.height,x:0, render:true},{y1:0,y2:canvas.height,x:canvas.width, render:true}]};
+simpleposition:true,goalposition:[5800,-2000],question: "Which of the following are people superstitious about? A; If you dream of a grey cat then you will find yourself in great wealth, B; If you think of a black cat with blue eyes then it will rain the next day, C; If you dream of a white cat, good luck will follow.", answer:"C",answered: false}];
+  let endlevel = {h:[{x1:0,x2:canvas.width,y:0, render:true},{x1:0,x2:canvas.width,y:canvas.height, render:true}],v:[{y1:0,y2:canvas.height,x:0, render:true},{y1:0,y2:canvas.height,x:canvas.width, render:true}],
+question: "The first year of a cats life is equal to _____ human years. A;15, B; 7, C; 3", answer:"A",answered: false};
   let enemyArray = [];
   /*21 by 14?*/
   var level = 1;
 
   function init(){
       level=1;
+      alert("Instructions: Hello player! Please use the WASD keys to move, W to go forward, A to got to the left, D to got to the right, and S to go backward. You have to avoid the cats, dog, and people you see along the way (Besides that orange cat, Ernie. That’s you!) Your goal is to get to the milk bowl! Once you get there answer the question correctly and move on to the next level! Thanks! Meow!");
       player.rpos();
       enemyArray = [];
       hborders.splice(0,hborders.length);
@@ -148,6 +150,11 @@ simpleposition:true,goalposition:[5800,-2000]}];
         goal.y = 0;
       }
     } else {
+      triviaguess = prompt(endlevel.question);
+      while(triviaguess!==endlevel.answer){
+        alert("Sorry, incorrect!");
+        triviaguess = prompt(endlevel.question);
+      }
       hborders.push.apply(hborders, endlevel.h);
       vborders.push.apply(vborders, endlevel.v);
       goal.width = goal.height = -1;
